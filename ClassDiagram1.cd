@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CameraMovement" Collapsed="true">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAABAAAAABBAAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\Camera\CameraMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraShake" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAACAgAAAIAAAAAAAAAAAAAAAAAAAACQkAAAg=</HashCode>
+      <FileName>Assets\Camera\CameraShake.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FreeForAll" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAQIAAGAAAAAAAAAAAAAAAAAAAAAACAABAAAAAAA=</HashCode>
+      <FileName>Assets\Game Modes\FreeForAll.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameManager" Collapsed="true">
+    <Position X="9.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAACQCAAAAAAAAEAAAAABAAAAAAABgCAAAAAEAA=</HashCode>
+      <FileName>Assets\Game Modes\GameManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameMode" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAIAAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Game Modes\GameMode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawLogo" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACgAAAEEAAADAAAAAACAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Assets\Intro\DrawLogo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Crate" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Items\Crate.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ForceField" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAQCAACAABEAIAAAAAAAAAAACAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Items\Force Field\ForceField.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GhostMode" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAQCAACAABEAIAAAAAAAAAAACAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Items\Ghost\GhostMode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Jetpack" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAQCAACAABEIYAABAAAAEAAACAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Assets\Items\Jet Pack\Jetpack.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AimAndShoot" Collapsed="true">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQICAAABAAAAAEAAAAAAQAAAAgAAEAAAAAAAUA=</HashCode>
+      <FileName>Assets\Pixel Art Rotation\DemoScene\Scripts\AimAndShoot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelRotation" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAABBQSAAAEACoQAAEBAAAQAIIkAAAAAAAEA=</HashCode>
+      <FileName>Assets\Pixel Art Rotation\Scripts\PixelRotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Rotation" Collapsed="true">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgBgCABCAAAAAEAAAAABAAAAAAAAAAAAQAAAI=</HashCode>
+      <FileName>Assets\Pixel Art Rotation\Scripts\Rotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Orbit" Collapsed="true">
+    <Position X="13" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAACCAAABAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\DemoScenes\DemoAssets\Orbit.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfect" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAEAAAAAAAAAEACAAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\Internal\PixelPerfect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfectObject" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>hABCCIBAgAIAAQBYAAABIAAAAAAgAAAAASAAQEEQCgA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\Internal\PixelPerfectObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfectCamera" Collapsed="true">
+    <Position X="9.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAgUCAAACISAAAAAAASQYRpJIAAAAAMICigWgIACCGA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\PixelPerfectCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfectCameraEditor" Collapsed="true">
+    <Position X="11.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgACAAECACAABAEAACCCAACIAAABAIAACgAAIABAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\PixelPerfectCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfectSprite" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACBAAAAAIAAAAAAAAAAAAAAAAEEAAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\PixelPerfectSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PixelPerfectSpriteEditor" Collapsed="true">
+    <Position X="13" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAEAAAAABAIAAADCAAAAAAgAAAAASAAAEAQAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\PixelPerfectSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blaster" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAAAAgAAgBEECAAAIABAABACAAAAASRAAAEAAgAE=</HashCode>
+      <FileName>Assets\Player\Blaster\Blaster.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ExplosionBehavior" Collapsed="true">
+    <Position X="6" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAKAAAQAAAABAAEAAAEAQIAAYAAAAAAgAAAA=</HashCode>
+      <FileName>Assets\Player\Explosions\ExplosionBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrenadeBehavior" Collapsed="true">
+    <Position X="13" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAACAAAAAACQAEAAAAAAAAIEAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Player\Grenade Launcher\GrenadeBehavior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GrenadeLauncher" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACgABAUAAAAAAAAABABAAAAACQCACEAgAAA=</HashCode>
+      <FileName>Assets\Player\Grenade Launcher\GrenadeLauncher.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="GroundCollider" Collapsed="true">
+    <Position X="6" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAACBIAgAEAAAAAAAAAMAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Player\GroundCollider.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pistol" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AGQEAAAgAoAABAkAAAAAANAABAAAAAAECQAAAkAQAAA=</HashCode>
+      <FileName>Assets\Player\Pistol\Pistol.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="PistolBulletMovement" Collapsed="true">
+    <Position X="6" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABYAACAAAIAAAQIAAEAAAAAAIEAAAQAAAAAAAEAAAAA=</HashCode>
+      <FileName>Assets\Player\Pistol\PistolBulletMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Helmet" Collapsed="true">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAEAAABAAAAAAAAAAAAAAAAgAAAAAAgAAgAAAAA=</HashCode>
+      <FileName>Assets\Player\Player Parts\Helmet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerControls" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAZYCGeAAuLXL+2ktxjjCAmEDECNSgAkYGUAQCgqBCU=</HashCode>
+      <FileName>Assets\Player\PlayerControls.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WeaponAddToPlayer" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAAAAABAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Player\WeaponAddToPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainGUI" Collapsed="true">
+    <Position X="11.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAAAAIAAACAAACwABAAAAAAQRAAAAADAAARAQAgEABA=</HashCode>
+      <FileName>Assets\Scripts\MainGUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlowMo" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAAQFAAAAAABAEAAAAAAAQAAGAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\SlowMo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Timer" Collapsed="true">
+    <Position X="11.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAACBAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Assets\Scripts\Timer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="HSBColor" Collapsed="true">
+    <Position X="6" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAEAAAAAAAEAAAAAAAgwYAACAAAAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\Internal\HSBColor.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="PowerUp" Collapsed="true">
+    <Position X="7.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAACAABEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Items\PowerUp.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Weapon" Collapsed="true">
+    <Position X="9.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAEAAAAAAAAABAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Player\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Damageable" Collapsed="true">
+    <Position X="6" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Damageable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="PixelPerfectFitType" Collapsed="true">
+    <Position X="6" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\Internal\PixelPerfect.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PixelPerfectZoomMode" Collapsed="true">
+    <Position X="7.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\PixelPerfect\Scripts\Internal\PixelPerfect.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

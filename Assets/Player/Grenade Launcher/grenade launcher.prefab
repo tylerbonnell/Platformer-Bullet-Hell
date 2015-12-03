@@ -123,8 +123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f45612aff6cd53489e0e3ea2a0ff5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerNetId:
-    m_Value: 0
   isRightArm: 0
 --- !u!212 &21216214
 SpriteRenderer:
@@ -144,7 +142,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -201,6 +201,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bebe96c003dcddb43a80f64342592480, type: 2}
+    - target: {fileID: 0}
+      propertyPath: MainSprite
+      value: 
+      objectReference: {fileID: 21216214}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 145146}

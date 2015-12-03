@@ -8,11 +8,6 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 	private Animator LegAnimator;
 	private Rigidbody2D rb;
 
-	/*public Color HeadMainColor;
-	public Color HeadSecondaryColor;
-	public Color BodyMainColor;
-	public Color BodySecondaryColor;*/
-
 	public int MaxHealth;
 	[SyncVar]
 	private int Health;
@@ -76,6 +71,7 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		CmdInstantiateArms ();
 	}
 
+	// Adds the player information to the game manager
 	[Server]
 	public override void OnStartServer () {
 		GameManager.AddNewPlayerInfo (netId, gameObject);
@@ -102,12 +98,13 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		Animation ();
 	}
 
+	// Physics update
 	void FixedUpdate () {
 		if (isLocalPlayer)
 			Movement ();
 	}
 
-	// Spawn arms, set up all the arm-related variables
+	// Spawn arms on all clients
 	[Command]
 	void CmdInstantiateArms () {
 		// Left arm components
@@ -124,6 +121,8 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		ScriptR.isRightArm = true;
 		NetworkServer.Spawn (RightArm.gameObject);
 	}
+
+	// Sets all fields for the right arm
 	public void ConfigureRightArm (Transform newRightArm) {
 		RightArm = newRightArm;
 		RightArm.parent = BodySprite.transform;
@@ -135,6 +134,8 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		RightUpperArmSprite = RightUpperArm.GetComponent<SpriteRenderer> ();
 		RightUpperArmAnim = RightUpperArm.GetComponent<Animator> ();
 	}
+
+	// Positions the right arm and sets the index
 	void PositionRightArm () {
 		if (facingRight) {
 			RightArm.position = RightArmLocation.position;
@@ -148,6 +149,8 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 			RightUpperArmSprite.sortingOrder = -3;
 		}
 	}
+
+	// Sets all fields for the left arm
 	public void ConfigureLeftArm (Transform newLeftArm) {
 		LeftArm = newLeftArm;
 		LeftArm.parent = BodySprite.transform;
@@ -159,6 +162,8 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		LeftUpperArmSprite = LeftUpperArm.GetComponent<SpriteRenderer> ();
 		LeftUpperArmAnim = LeftUpperArm.GetComponent<Animator> ();
 	}
+
+	// Positions the left arm and sets the index
 	void PositionLeftArm () {
 		if (facingRight) {
 			LeftArm.position = LeftArmLocation.position;
@@ -272,24 +277,39 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		if (shouldFlip)
 			CmdFlip (facingRight);
 	}
+
+	// Sends the angle to the player on the server
 	[Command]
 	void CmdSetAngle (int angle, bool isRightArm) {
 		RpcSetAngle (angle, isRightArm);
 	}
+
+	// Sends the angle to all clients to make arms display correctly
 	[ClientRpc]
 	void RpcSetAngle (int angle, bool isRightArm) {
 		if (!isLocalPlayer) {
 			PixelRotation pr = LeftArmRotation;
-			if (isRightArm)
+			PixelRotation pr2 = LeftUpperArmRotation;
+			if (isRightArm) {
 				pr = RightArmRotation;
-			if (pr != null)
+				pr2 = RightUpperArmRotation;
+			}
+			if (pr != null) {
 				pr.Angle = angle;
+			}
+			if (pr2 != null) {
+				pr2.Angle = angle;
+			}
 		}
 	}
+
+	// Sends the command to flip to the player on the server
 	[Command]
 	void CmdFlip (bool newFacingRight) {
 		RpcFlip (newFacingRight);
 	}
+
+	// Sends the command back to each client so that the player is oriented correctly
 	[ClientRpc]
 	void RpcFlip (bool newFacingRight) {
 		if (!isLocalPlayer)
@@ -331,6 +351,7 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		}
 	}
 
+	// Sets animation states
 	void Animation () {
 		bool grounded = GetGrounded ();
 
@@ -354,9 +375,9 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		} else {
 			RunningParticles.enableEmission = false;
 		}
-
 	}
 
+	// Tests if the collider at the feet is grounded
 	public GroundCollider GroundColliderScript;
 	bool GetGrounded () {
 		return GroundColliderScript.Grounded;
@@ -364,10 +385,12 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		//	1 << LayerMask.NameToLayer ("Ground"));
 	}
 
+	// Sends the running direction to the player on the server
 	[Command]
 	void CmdSetRunDirection (float dx) {
 		RpcSetRunDirection (dx);
 	}
+	// Sends the running directiont to all clients so the running animation can display correctly
 	[ClientRpc]
 	void RpcSetRunDirection (float dx) {
 		this.dx = dx;
@@ -375,7 +398,6 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 
 	// Flip the direction the player character is facing
 	void Flip (bool right) {
-		//if (right != facingRight) {
 		facingRight = right;
 		Vector3 flippedScale = transform.localScale;
 		flippedScale.x = Mathf.Abs (flippedScale.x);
@@ -385,11 +407,10 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 
 		PositionRightArm ();
 		PositionLeftArm ();
-		//}
 	}
 
-	private MainGUI GUI;
 	// Updates all parts of the GUI
+	private MainGUI GUI;
 	void UpdateGUI () {
 		GUI.DisplayHealth (Health, MaxHealth);
 		GUI.WeaponDisplayOne.text = RightArmWeapon.GUI ();
@@ -421,11 +442,23 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		GameManager.CurrentGame.Kill (gameObject);
 	}
 
-
+	// Adds a force to the local player, from the server. Since we can't send the force to
+	// one player in particular, we have to send it to all of them and test if it is the local player
 	[ClientRpc]
 	void RpcAddForce (Vector3 force) {
 		if (isLocalPlayer)
 			rb.AddForce (force);
+	}
+
+	// Puts all the colorable objects together in colorObjects
+	private List<ColorObject> colorObjects;
+	void configureColorParts () {
+		colorObjects = new List<ColorObject> ();
+		SpriteRenderer[] alphaSprites = new SpriteRenderer[] { BodySprite, LegSprite, RightUpperArmSprite, LeftUpperArmSprite, HeadSprite };
+		foreach (SpriteRenderer s in alphaSprites) {
+			if (s != null && s.GetComponent<ColorObject> () != null)
+				colorObjects.Add(s.GetComponent<ColorObject> ());
+		}
 	}
 
 	// Flash the player white when damaged
@@ -434,47 +467,46 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 	[ClientRpc]
 	void RpcFlashPlayerWhite () {
 		FlashPlayerWhite ();
-	}
-	void FlashPlayerWhite () {
-		BodySprite.material = SolidWhiteMaterial;
-		LegSprite.material = SolidWhiteMaterial;
-		RightArmSprite.material = SolidWhiteMaterial;
-		LeftArmSprite.material = SolidWhiteMaterial;
 		Invoke ("ResetPlayerColor", .08f);
 	}
+	void FlashPlayerWhite () {
+		//SetPlayerMaterial (SolidWhiteMaterial);
+	}
 	void ResetPlayerColor () {
-		BodySprite.material = DefaultMaterial;
-		LegSprite.material = DefaultMaterial;
-		RightArmSprite.material = DefaultMaterial;
-		LeftArmSprite.material = DefaultMaterial;
+		//SetPlayerMaterial (DefaultMaterial);
+	}
+	void SetPlayerMaterial (Material m) {
+		if (colorObjects == null) {
+			configureColorParts ();
+		}
+		foreach (ColorObject c in colorObjects) {
+			c.SetMaterial(m);
+		}
+		LeftArmSprite.material = m;
+		RightArmSprite.material = m;
 	}
 
 	// Set a player's alpha value;
-	private List<ColorObject> colorObjects = new List<ColorObject> ();
 	public void SetAlpha (float percent) {
-		if (colorObjects.Count == 0) {
-			SpriteRenderer[] alphaSprites = new SpriteRenderer[] { BodySprite, LegSprite, RightArmSprite, LeftArmSprite, RightUpperArmSprite, LeftUpperArmSprite, HeadSprite };
-			foreach (SpriteRenderer s in alphaSprites) {
-				if (s.GetComponent<ColorObject> () != null)
-					colorObjects.Add(s.GetComponent<ColorObject> ());
-			}
+		/*if (colorObjects == null) {
+			configureColorParts ();
 		}
 		foreach (ColorObject c in colorObjects) {
 			c.SetAlpha (percent);
 		}
 		SetAlpha (LeftArmSprite, percent);
-		SetAlpha (RightArmSprite, percent);
+		SetAlpha (RightArmSprite, percent);*/
 	}
-
 	public void SetAlpha (SpriteRenderer sp, float percent) {
 		Color c = sp.color;
 		c.a = percent;
 		sp.color = c;
 	}
 
-	// The currently equipped powerup, stored locally
+	// The powerup in the inventory to be used next
 	PowerUp SecondPowerUp;
 	GameObject SecondPowerUpObj;
+	// The powerup that is being used currently
 	PowerUp EquippedPowerUp;
 	GameObject EquippedPowerUpObj;
 	// Detects the player colliding with a trigger
@@ -504,6 +536,7 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		}
 	}
 
+	// Command sent to the server to use a powerup
 	[Command]
 	void CmdEquipPowerUp () {
 		if (SecondPowerUpObj != null) { // there is a powerup to use
@@ -532,7 +565,8 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		}
 	}
 
-	// These are used by the Jetpack class (and maybe other powerups in the future!)
+	// These are used by the Jetpack class (and maybe other powerups in the future!) Because commands
+	// can only be used by player objects, we need to funnel it through this script from the jetpack
 	public void UnSetup () {
 		CmdUnSetup ();
 	}

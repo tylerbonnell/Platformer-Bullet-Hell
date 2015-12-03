@@ -70,7 +70,7 @@ public class Pistol : NetworkBehaviour, Weapon {
 			Vector2 force = (Vector3.up * Mathf.Sin (casingAngleRandom + angle) + Vector3.right * Mathf.Cos (casingAngleRandom + angle) * dir) * casingVelocity;
 
 			RpcLocalEffects (casingPos, force);
-			LocalEffects (casingPos, force);
+			//LocalEffects (casingPos, force);
 			NetworkServer.Spawn (nb); // spawn the bullet on the server
 			PistolBulletMovement nbScript = nb.GetComponent<PistolBulletMovement> ();
 			nbScript.shooter = transform.parent.parent.gameObject;

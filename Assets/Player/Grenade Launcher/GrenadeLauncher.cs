@@ -54,7 +54,7 @@ public class GrenadeLauncher : NetworkBehaviour, Weapon {
 				GrenadeOutBehavior.rb.AddForce (force);
 				GrenadeOutBehavior.Launcher = this;
 				RpcAnimation ();
-				anim.SetTrigger ("Shoot");
+				//anim.SetTrigger ("Shoot");
 				if (CameraShake.cam.camMove.player == transform.parent)
 					CameraShake.cam.Shake (.1f, 5);
 				NetworkServer.Spawn (GrenadeOut); // spawn the bullet on the server
@@ -69,9 +69,13 @@ public class GrenadeLauncher : NetworkBehaviour, Weapon {
 		return 0f;
 	}
 
+	private WeaponAddToPlayer WeaponAdd;
 	[ClientRpc]
 	void RpcAnimation () {
 		anim.SetTrigger("Shoot");
+		if (WeaponAdd == null)
+			WeaponAdd = GetComponent<WeaponAddToPlayer> ();
+		WeaponAdd.SetUpperArmTrigger ("Pistol_Shoot");
 		if (CameraShake.cam.camMove.player == transform.parent.parent)
 			CameraShake.cam.Shake (.08f, 5);
 	}

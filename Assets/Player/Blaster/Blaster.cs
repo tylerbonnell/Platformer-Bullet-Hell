@@ -53,7 +53,7 @@ public class Blaster : NetworkBehaviour, Weapon {
 			if (timeHeldDown > TimeToShoot && !showingCharged) {
 				showingCharged = true;
 				RpcChargedAnim ();
-				anim.SetTrigger ("Charged");
+				//anim.SetTrigger ("Charged");
 			}
 			if (!TimerEnabled) {
 				RpcStartTimer ();
@@ -65,14 +65,14 @@ public class Blaster : NetworkBehaviour, Weapon {
 			guiTimer = 0f;
 
 			showingCharged = false;
-			triggerDownPreviously = isTriggerDown;
+			triggerDownPreviously = false;
 			Vector3 bulletPos = transform.position;
 			float angle = PixRotation.Angle * Mathf.Deg2Rad;
 			float DistToTip = 20f / 16f;
 			bulletPos.x += transform.parent.parent.localScale.x * Mathf.Cos (angle) * DistToTip;
 			bulletPos.y += Mathf.Sin (angle) * DistToTip;
 			RpcLocalEffects ();
-			LocalEffects ();
+			//LocalEffects ();
 			for (float i = 0; i < AmountOfBullets; i++) {
 				GameObject nb = (GameObject)Instantiate (bullet, bulletPos, Quaternion.identity);
 				NetworkServer.Spawn (nb); // spawn the bullet on the server

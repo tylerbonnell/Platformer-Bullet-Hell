@@ -739,6 +739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSprite: {fileID: 21213394}
   SecondarySprite: {fileID: 0}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  solidWhiteMaterial: {fileID: 2100000, guid: ceee3ce78f871ab48b5d4056fddddabc, type: 2}
 --- !u!114 &11421884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -785,6 +787,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSprite: {fileID: 21265008}
   SecondarySprite: {fileID: 0}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  solidWhiteMaterial: {fileID: 2100000, guid: ceee3ce78f871ab48b5d4056fddddabc, type: 2}
 --- !u!114 &11451218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -812,6 +816,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSprite: {fileID: 21295300}
   SecondarySprite: {fileID: 21273292}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  solidWhiteMaterial: {fileID: 2100000, guid: ceee3ce78f871ab48b5d4056fddddabc, type: 2}
 --- !u!114 &11473082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -859,6 +865,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSprite: {fileID: 21233012}
   SecondarySprite: {fileID: 0}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  solidWhiteMaterial: {fileID: 2100000, guid: ceee3ce78f871ab48b5d4056fddddabc, type: 2}
 --- !u!114 &11485698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -872,6 +880,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainSprite: {fileID: 21299526}
   SecondarySprite: {fileID: 0}
+  defaultMaterial: {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  solidWhiteMaterial: {fileID: 2100000, guid: ceee3ce78f871ab48b5d4056fddddabc, type: 2}
 --- !u!198 &19816030
 ParticleSystem:
   m_ObjectHideFlags: 1

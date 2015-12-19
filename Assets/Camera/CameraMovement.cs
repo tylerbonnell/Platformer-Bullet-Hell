@@ -4,14 +4,23 @@ using System.Collections;
 public class CameraMovement : MonoBehaviour {
 
 	public Transform player;
+	private PlayerControls pc;
 	public bool TrackPlayer = true;
 	public float CamDistance = 20f;
 	public MainGUI GUI;
+	private float lerpSpeed = .03f;
+	private Vector3 lastPlayerPosition = new Vector3 (0, 5, -100);
 
 	// Update is called once per frame
 	public Vector3 CalculatePosition (Vector3 camPos) {
 		if (player == null || !TrackPlayer)
 			return new Vector3 (0, 5, -100);
+
+		if (pc == null)
+			pc = player.GetComponent<PlayerControls> ();
+
+		if (pc.Alive)
+			lastPlayerPosition = player.position;
 
 		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
@@ -21,12 +30,13 @@ public class CameraMovement : MonoBehaviour {
 		float mousePercentageFromCenterY = Mathf.Abs (mousePos.y - transform.position.y) / size.y;
 
 		/* Center camera between player and mouse*/
-		Vector3 midPos = (mousePos - player.position).normalized;
+		Vector3 midPos = (mousePos - lastPlayerPosition).normalized;
 		midPos.x *= mousePercentageFromCenterX * CamDistance;
 		midPos.y *= mousePercentageFromCenterY * CamDistance;
-		midPos += player.position;
+		midPos += lastPlayerPosition;
 		midPos.z = transform.position.z;
-		return Vector3.Lerp (camPos, midPos, .03f);
+
+		return Vector3.Lerp (camPos, midPos, lerpSpeed);
 
 		/* Center between player and mouse, not relative to mouse distance from player
 		Vector3 midPos = (mousePos - player.position).normalized * 6 + player.position;

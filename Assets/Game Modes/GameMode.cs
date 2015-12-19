@@ -7,5 +7,5 @@ public abstract class GameMode : NetworkBehaviour {
 	public MainGUI GUI;
 
 	public bool TimedMatch;
-	public abstract void Kill (GameObject killedPlayed);
+	public abstract void Kill (PlayerControls killedPlayed);
 }

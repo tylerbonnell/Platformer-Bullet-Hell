@@ -8,6 +8,7 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 	private Animator LegAnimator;
 	private Rigidbody2D rb;
 
+	public bool Alive = true;
 	public int MaxHealth;
 	[SyncVar]
 	private int Health;
@@ -79,7 +80,11 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 
 	// Update is called once per frame
 	void Update () {
-		if (LeftArmWeapon == null || RightArmWeapon == null)
+		if(Input.GetKeyDown("f")) {
+			AliveAndVisible (!Alive);
+		}
+
+		if (LeftArmWeapon == null || RightArmWeapon == null || !Alive)
 			return;
 
 		if (isLocalPlayer) {
@@ -100,7 +105,7 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 
 	// Physics update
 	void FixedUpdate () {
-		if (isLocalPlayer)
+		if (isLocalPlayer && Alive)
 			Movement ();
 	}
 
@@ -412,18 +417,22 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 	// Updates all parts of the GUI
 	private MainGUI GUI;
 	void UpdateGUI () {
-		GUI.DisplayHealth (Health, MaxHealth);
-		GUI.WeaponDisplayOne.text = RightArmWeapon.GUI ();
-		GUI.WeaponDisplayTwo.text = LeftArmWeapon.GUI ();
+		if (GUI != null) {
+			GUI.DisplayHealth (Health, MaxHealth);
+			GUI.WeaponDisplayOne.text = RightArmWeapon.GUI ();
+			GUI.WeaponDisplayTwo.text = LeftArmWeapon.GUI ();
+		}
 	}
 
 	// Apply damage and knockback to the player, only calculated on the server
 	public void Damage (int DamageAmount, GameObject shooter, Vector3 force = default(Vector3)) {
-		if (!isServer || Health == 0 || ForceField.activeInHierarchy)
+		if (!isServer || Health == 0)
 			return;
 
-		Health = Mathf.Max (Health - DamageAmount, 0);
-		RpcFlashPlayerWhite ();
+		if (!ForceField.activeInHierarchy) {
+			Health = Mathf.Max (Health - DamageAmount, 0);
+			RpcFlashPlayerWhite ();
+		}
 		RpcAddForce (force);
 		if (isServer && isLocalPlayer) {
 			FlashPlayerWhite ();
@@ -436,10 +445,35 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		}
 	}
 
-	// Manages game information for when the player is killed
+	// This can be called to toggle whether or not the player is, well, alive and visible. Ran on server.
+	public void AliveAndVisible (bool alive) {
+		if (!alive) {
+			CmdUnSetup();
+		}
+		Rpc_AliveAndVisible (alive);
+	}
+	[ClientRpc]
+	private void Rpc_AliveAndVisible (bool alive) {
+		Debug.Log ("set alive state to " + alive);
+		SetAlpha (alive ? 1f : 0f);
+		GetComponent<Rigidbody2D> ().simulated = alive;
+		Health = MaxHealth;
+		Alive = alive;
+		if (!alive) {
+			EquippedPowerUp = null;
+			EquippedPowerUpObj = null;
+			SecondPowerUp = null;
+			SecondPowerUpObj = null;
+			if (isLocalPlayer) {
+				MainGUI.GUI.SetPowerUpIcon (null);
+			}
+		}
+	}
+
+	// Manages game information for when the player is killed. Ran on the server.
 	public void Die () {
 		UpdateGUI ();
-		GameManager.CurrentGame.Kill (gameObject);
+		GameManager.CurrentGame.Kill (this);
 	}
 
 	// Adds a force to the local player, from the server. Since we can't send the force to
@@ -448,17 +482,6 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 	void RpcAddForce (Vector3 force) {
 		if (isLocalPlayer)
 			rb.AddForce (force);
-	}
-
-	// Puts all the colorable objects together in colorObjects
-	private List<ColorObject> colorObjects;
-	void configureColorParts () {
-		colorObjects = new List<ColorObject> ();
-		SpriteRenderer[] alphaSprites = new SpriteRenderer[] { BodySprite, LegSprite, RightUpperArmSprite, LeftUpperArmSprite, HeadSprite };
-		foreach (SpriteRenderer s in alphaSprites) {
-			if (s != null && s.GetComponent<ColorObject> () != null)
-				colorObjects.Add(s.GetComponent<ColorObject> ());
-		}
 	}
 
 	// Flash the player white when damaged
@@ -470,32 +493,32 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		Invoke ("ResetPlayerColor", .08f);
 	}
 	void FlashPlayerWhite () {
-		//SetPlayerMaterial (SolidWhiteMaterial);
+		SetPlayerFlashState (SolidWhiteMaterial, true);
 	}
 	void ResetPlayerColor () {
-		//SetPlayerMaterial (DefaultMaterial);
+		SetPlayerFlashState (DefaultMaterial, false);
 	}
-	void SetPlayerMaterial (Material m) {
-		if (colorObjects == null) {
-			configureColorParts ();
-		}
-		foreach (ColorObject c in colorObjects) {
-			c.SetMaterial(m);
-		}
+	void SetPlayerFlashState (Material m, bool makeWhite) {
+		LegSprite.GetComponent<ColorObject> ().ToggleFlashing (makeWhite);
+		RightUpperArmSprite.GetComponent<ColorObject> ().ToggleFlashing (makeWhite);
+		LeftUpperArmSprite.GetComponent<ColorObject> ().ToggleFlashing (makeWhite);
+		HeadSprite.GetComponent<ColorObject> ().ToggleFlashing (makeWhite);
+		BodySprite.GetComponent<ColorObject> ().ToggleFlashing (makeWhite);
+
 		LeftArmSprite.material = m;
 		RightArmSprite.material = m;
 	}
 
-	// Set a player's alpha value;
+	// Set a player's alpha value from 1f to 0f;
 	public void SetAlpha (float percent) {
-		/*if (colorObjects == null) {
-			configureColorParts ();
-		}
-		foreach (ColorObject c in colorObjects) {
-			c.SetAlpha (percent);
-		}
+		LegSprite.GetComponent<ColorObject> ().SetAlpha (percent);
+		RightUpperArmSprite.GetComponent<ColorObject> ().SetAlpha (percent);
+		LeftUpperArmSprite.GetComponent<ColorObject> ().SetAlpha (percent);
+		HeadSprite.GetComponent<ColorObject> ().SetAlpha (percent);
+
+		SetAlpha (BodySprite, percent);
 		SetAlpha (LeftArmSprite, percent);
-		SetAlpha (RightArmSprite, percent);*/
+		SetAlpha (RightArmSprite, percent);
 	}
 	public void SetAlpha (SpriteRenderer sp, float percent) {
 		Color c = sp.color;

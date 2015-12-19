@@ -13,7 +13,7 @@ public class FreeForAll : GameMode {
 	void Start () {
 		GUI = GameObject.FindGameObjectWithTag ("GUI").GetComponent<MainGUI> ();
 		Seconds_ = Seconds;
-		RespawnStack = new Stack<GameObject> ();
+		RespawnQueue = new Queue<PlayerControls> ();
 	}
 
 	void Update () {
@@ -25,15 +25,16 @@ public class FreeForAll : GameMode {
 		}
 	}
 
-	public override void Kill (GameObject killedPlayer) {
-		killedPlayer.SetActive (false);
-		RespawnStack.Push (killedPlayer);
-		Invoke ("RespawnNext", 5f);
+	// Called on server
+	public override void Kill (PlayerControls killedPlayer) {
+		killedPlayer.AliveAndVisible (false);
+		RespawnQueue.Enqueue (killedPlayer);
+		Invoke ("RespawnNext", 10f);
 	}
 
-	private Stack<GameObject> RespawnStack;
+	private Queue<PlayerControls> RespawnQueue;
 	private void RespawnNext () {
-		GameObject RevivedPlayer = RespawnStack.Pop ();
-		RevivedPlayer.SetActive (true);
+		PlayerControls RevivedPlayer = RespawnQueue.Dequeue ();
+		RevivedPlayer.AliveAndVisible (true);
 	}
 }

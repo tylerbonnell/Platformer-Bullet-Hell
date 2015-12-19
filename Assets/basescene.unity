@@ -1404,9 +1404,9 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 8.09742928
+  field of view: 7.38449764
   orthographic: 1
-  orthographic size: 3.51533675
+  orthographic size: 6.453125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1487,11 +1487,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fitType: 1
-  targetPixelHeight: 240
+  targetPixelHeight: 360
   parallaxLayerCount: 10
   cameraZoom: 1
   pixelatedPostProcessing: 0
-  heightError: 70
+  heightError: 110
   showGizmos: 0
   pixelZoomMode: 1
 --- !u!1 &1379188484

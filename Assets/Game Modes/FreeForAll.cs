@@ -29,7 +29,7 @@ public class FreeForAll : GameMode {
 	public override void Kill (PlayerControls killedPlayer) {
 		killedPlayer.AliveAndVisible (false);
 		RespawnQueue.Enqueue (killedPlayer);
-		Invoke ("RespawnNext", 10f);
+		Invoke ("RespawnNext", 1.5f);
 	}
 
 	private Queue<PlayerControls> RespawnQueue;

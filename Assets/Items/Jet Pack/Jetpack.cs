@@ -8,6 +8,7 @@ public class Jetpack : NetworkBehaviour, PowerUp {
 	public float MaxFuel;
 	public float CurrentFuel;
 	public Sprite Icon;
+	public SpriteRenderer childSR;
 
 	public void PickUp (PlayerControls pc) {
 		this.pc = pc;
@@ -17,7 +18,7 @@ public class Jetpack : NetworkBehaviour, PowerUp {
 	void RpcPickUp (NetworkInstanceId id) {
 		if (pc == null)
 			pc = ClientScene.FindLocalObject (id).GetComponent<PlayerControls> ();	
-		GetComponent<SpriteRenderer> ().enabled = false;
+		childSR.enabled = false;
 		GetComponent<CircleCollider2D> ().enabled = false;
 		if (pc.isLocalPlayer)
 			MainGUI.GUI.SetPowerUpIcon (Icon);

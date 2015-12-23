@@ -14,7 +14,7 @@ public class GameManager : NetworkBehaviour {
 
 	public static GameMode CurrentGame;
 	public static GameManager CurrentGameManager;
-
+	
 	void Start () {
 		CurrentGameManager = this;
 		MODE gamemode = MODE.FREE_FOR_ALL;

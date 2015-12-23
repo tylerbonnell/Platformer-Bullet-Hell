@@ -80,10 +80,6 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown("f")) {
-			AliveAndVisible (!Alive);
-		}
-
 		if (LeftArmWeapon == null || RightArmWeapon == null || !Alive)
 			return;
 
@@ -445,17 +441,23 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 		}
 	}
 
-	// This can be called to toggle whether or not the player is, well, alive and visible. Ran on server.
+	// This can be called to toggle whether or not the player is, well, alive and visible.
+	// Ran on server. Also teleports the player to a new location based on the Map.
 	public void AliveAndVisible (bool alive) {
 		if (!alive) {
 			CmdUnSetup();
+		}
+		if (alive) {
+			transform.position = Map.singleton.getRandomLocation ().position;
+			rb.velocity = Vector3.zero;
 		}
 		Rpc_AliveAndVisible (alive);
 	}
 	[ClientRpc]
 	private void Rpc_AliveAndVisible (bool alive) {
 		Debug.Log ("set alive state to " + alive);
-		SetAlpha (alive ? 1f : 0f);
+		UpdateGUI ();
+
 		GetComponent<Rigidbody2D> ().simulated = alive;
 		Health = MaxHealth;
 		Alive = alive;
@@ -468,7 +470,11 @@ public class PlayerControls : NetworkBehaviour, Damageable {
 				MainGUI.GUI.SetPowerUpIcon (null);
 			}
 		}
+		SpriteRenderer[] renders = this.GetComponentsInChildren<SpriteRenderer> ();
+		foreach (SpriteRenderer r in renders)
+			r.enabled = alive;
 	}
+
 
 	// Manages game information for when the player is killed. Ran on the server.
 	public void Die () {
